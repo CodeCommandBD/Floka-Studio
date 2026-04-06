@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
 const MOBILE_VIDEO_SRC = "/Hero-video.mp4";
 const DESKTOP_VIDEO_SRC = "/hero-pc.mp4";
@@ -203,7 +205,7 @@ export default function Hero() {
             {/* Description text — below card */}
             <div
               ref={descRef}
-              className="text-left lg:text-right w-full"
+              className="text-left lg:text-right w-full flex flex-col items-start lg:items-end"
               style={{ maxWidth: "clamp(280px, 25vw, 340px)" }}
             >
               <p
@@ -223,6 +225,17 @@ export default function Hero() {
                 Just real tools and smart strategies to grow your business and
                 elevate your brand.
               </p>
+
+              {/* Lab Experiment Link */}
+              <Link
+                href="/lab/particle-logo"
+                className="group mt-8 flex items-center gap-4 text-white/40 hover:text-white transition-all uppercase text-[9px] tracking-[0.3em] font-bold"
+              >
+                <span>Lab Experiment</span>
+                <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/40 group-hover:scale-110 transition-all duration-500">
+                  <div className="w-1 h-1 rounded-full bg-yellow-400 group-hover:animate-ping" />
+                </div>
+              </Link>
             </div>
           </div>
         </div>
