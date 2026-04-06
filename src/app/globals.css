@@ -57,4 +57,14 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  
+  .bg-grain {
+    background-image: url("https://www.transparenttextures.com/patterns/p6.png");
+    opacity: 0.12;
+    background-repeat: repeat;
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
 }
