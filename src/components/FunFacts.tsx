@@ -46,10 +46,14 @@ const Counter = ({ value, label, suffix = "", prefix = "", decimals = 0 }: { val
 };
 
 export default function FunFacts() {
+  const [mounted, setMounted] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const stickyColRef = useRef<HTMLDivElement>(null);
   
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -144,6 +148,7 @@ export default function FunFacts() {
       ref={sectionRef}
       className="w-full py-24 md:py-32 bg-white relative overflow-hidden shadow-[0_-20px_50px_rgba(0,0,0,0.1)] z-20"
       style={{ fontFamily: 'var(--font-funnel), sans-serif' }}
+      suppressHydrationWarning
     >
 
       <div ref={containerRef} className="max-w-[1280px] mx-auto px-4 md:px-12 grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-16 lg:gap-12 items-start">

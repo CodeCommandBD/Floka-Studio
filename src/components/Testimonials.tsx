@@ -125,14 +125,14 @@ const TestimonialCard = ({ item }: { item: typeof testimonials[0] }) => {
               animate={{ color: isHovered ? "#ffffff" : "#262626" }}
               className="text-[18px] md:text-[21px] leading-normal font-normal"
             >
-              " {item.text} "
+              &ldquo; {item.text} &rdquo;
             </motion.p>
           </div>
           <motion.div 
             animate={{ color: isHovered ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)" }}
             className="mt-12 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em]"
           >
-            " GREAT DESIGN SOLUTIONS "
+            &ldquo; GREAT DESIGN SOLUTIONS &rdquo;
           </motion.div>
         </div>
       </motion.div>
@@ -174,10 +174,17 @@ const TestimonialCard = ({ item }: { item: typeof testimonials[0] }) => {
 };
 
 export default function Testimonials() {
+  const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return <div className="min-h-[400px] bg-[#f8f8f8]" />;
+
   return (
-    <section ref={containerRef} className="w-full bg-[#f8f8f8] pt-2 pb-32 px-6 overflow-hidden">
+    <section ref={containerRef} className="w-full bg-[#f8f8f8] pt-2 pb-32 px-6 overflow-hidden" suppressHydrationWarning>
       <div className="max-w-[1340px] mx-auto">
         {/* Section Header */}
         <div className="mb-24">

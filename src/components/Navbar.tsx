@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
   { label: "Home", href: "#" },
@@ -13,28 +14,59 @@ const NAV_LINKS = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isSticky, setIsSticky] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      const currentScrollY = window.scrollY;
+      const scrollingDown = currentScrollY > lastScrollY;
+      
+      // Refined logic to eliminate any 'flick' during scroll-down
+      if (currentScrollY <= 120) {
+        // Absolute at top
+        setIsVisible(true);
+        setIsSticky(false);
+      } else if (scrollingDown) {
+        // Scrolling down - let it scroll away naturally in absolute/invisible state
+        setIsVisible(false);
+        // Don't flip to sticky/fixed yet to avoid the flick
+      } else if (!scrollingDown && currentScrollY > 250) {
+        // Scrolling up - only now become fixed sticky
+        setIsVisible(true);
+        setIsSticky(true);
+      }
+
+      setLastScrollY(currentScrollY);
     };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   return (
-    <header
+    <motion.header
       ref={navRef}
+      initial={{ y: 0 }}
+      animate={{ 
+        y: isVisible ? 0 : -100,
+        opacity: isVisible ? 1 : 0
+      }}
+      transition={{ 
+        duration: 0.35, 
+        ease: [0.16, 1, 0.3, 1] 
+      }}
       className={cn(
-        "absolute top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled ? "shadow-sm" : ""
+        "left-0 right-0 z-50 transition-all duration-300",
+        isSticky 
+          ? "fixed top-0 shadow-md bg-white py-1" 
+          : "absolute top-0 bg-white py-3 md:py-4 shadow-sm" // White bg and reduced padding
       )}
-      style={{ backgroundColor: "#ffffff" }}
     >
-      <nav className="flex items-center justify-between h-[60px] px-5 md:px-10 max-w-[1600px] mx-auto">
+      <nav className="flex items-center justify-between h-[65px] px-8 md:px-16 max-w-[1800px] mx-auto">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 shrink-0">
           {/* F icon in black square */}
@@ -108,7 +140,7 @@ export default function Navbar() {
           </Link>
         </div>
       )}
-    </header>
+    </motion.header>
   );
 }
 

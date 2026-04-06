@@ -61,7 +61,7 @@ export default function Hero() {
       ref={containerRef}
       className="w-full h-[82vh] lg:h-screen"
       style={{
-        paddingTop: "60px", // navbar height
+        paddingTop: "100px", // updated for white navbar height
         backgroundColor: "#ffffff",
         boxSizing: "border-box",
       }}

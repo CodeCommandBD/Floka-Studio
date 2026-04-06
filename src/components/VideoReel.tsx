@@ -6,9 +6,14 @@ import { Play, X } from "lucide-react";
 import Image from "next/image";
 
 export default function VideoReel() {
+  const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -24,7 +29,7 @@ export default function VideoReel() {
   };
 
   return (
-    <section ref={containerRef} className="w-full bg-white pt-1 pb-15 px-6 overflow-hidden">
+    <section ref={containerRef} className="w-full bg-white pt-1 pb-15 px-6 overflow-hidden" suppressHydrationWarning>
       <div className="max-w-[1280px] mx-auto">
 
         <motion.div 
@@ -100,7 +105,7 @@ export default function VideoReel() {
                }}
                className="text-white text-[10px] md:text-xs font-medium uppercase tracking-widest"
              >
-                Floka Studio ®
+                Floka Studio &reg;
              </motion.div>
           </div>
         </motion.div>

@@ -15,8 +15,26 @@ const logos = [
 ];
 
 export default function HappyUsers() {
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <section className="w-full bg-white border-t border-black/5 pb-2 min-h-[400px]">
+        <div className="max-w-[1280px] mx-auto px-6 py-6 border-x border-black/5">
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-black/40">
+            Loading...
+          </span>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className="w-full bg-white border-t border-black/5 pb-2">
+    <section className="w-full bg-white border-t border-black/5 pb-2" suppressHydrationWarning>
       {/* Upper Header Bar */}
       <div className="max-w-[1280px] mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-start md:items-center border-x border-black/5">
         <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-black/40">
