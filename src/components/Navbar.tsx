@@ -60,11 +60,12 @@ export default function Navbar() {
         ease: [0.16, 1, 0.3, 1] 
       }}
       className={cn(
-        "left-0 right-0 z-50 transition-all duration-300",
+        "left-0 right-0 z-50 transition-all duration-300 antialiased",
         isSticky 
-          ? "fixed top-0 shadow-md bg-white py-1" 
-          : "absolute top-0 bg-white py-3 md:py-4 shadow-sm" // White bg and reduced padding
+          ? "fixed top-0 shadow-md bg-white/80 py-1 backdrop-blur-md" 
+          : "absolute top-0 bg-white py-3 md:py-4 shadow-sm"
       )}
+      style={isSticky ? { WebkitBackdropFilter: "blur(12px)" } : {}}
     >
       <nav className="flex items-center justify-between h-[65px] px-8 md:px-16 max-w-[1800px] mx-auto">
         {/* Logo */}
