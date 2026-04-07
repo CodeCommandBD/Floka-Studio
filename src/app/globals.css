@@ -57,6 +57,14 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  /* GPU Acceleration Utility */
+  .optimize-gpu {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform;
+  }
   
   .bg-grain {
     background-image: url("https://www.transparenttextures.com/patterns/p6.png");
@@ -68,3 +76,4 @@ body {
     z-index: 1;
   }
 }
+
