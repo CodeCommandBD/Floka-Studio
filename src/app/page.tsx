@@ -26,25 +26,30 @@ export default function Home() {
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
+    // Global performance configuration
+    gsap.config({
+      force3D: true, // Forces hardware acceleration on all animations
+    });
+
     // Final refresh on window load (when all images are done)
     const handleLoad = () => {
       ScrollTrigger.refresh();
       // Force a resize event to trigger internal GSAP recalculation
-      window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event("resize"));
     };
 
     window.addEventListener("load", handleLoad);
-    
+
     // Global refresh after stabilization delay (for HMR and slower components)
     const timeout = setTimeout(() => {
       ScrollTrigger.refresh();
-      window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event("resize"));
     }, 1500);
 
     return () => {
       clearTimeout(timeout);
       window.removeEventListener("load", handleLoad);
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
 
