@@ -160,7 +160,7 @@ export default function FunFacts() {
           >
             <div className="w-full h-full">
               <Image
-                src="/fun-facts/main.webp"
+                src="/fun-facts/main.png"
                 alt="Creative Studio workspace"
                 fill
                 className="object-cover"
@@ -208,13 +208,13 @@ export default function FunFacts() {
                 {/* Image Stack */}
                 <div className="relative h-60 mt-4 mb-20">
                   <div className="stack-img-1 absolute top-4 left-6 w-32 h-44 rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl z-20">
-                    <Image src="/fun-facts/stack-1.webp" alt="UI Design" fill className="object-cover" />
+                    <Image src="/fun-facts/stack-1.png" alt="UI Design" fill className="object-cover" />
                   </div>
                   <div className="stack-img-2 absolute top-0 left-20 w-32 h-44 rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl z-10">
-                    <Image src="/fun-facts/stack-2.webp" alt="Branding" fill className="object-cover" />
+                    <Image src="/fun-facts/stack-2.png" alt="Branding" fill className="object-cover" />
                   </div>
                   <div className="stack-img-3 absolute top-8 right-6 w-32 h-44 rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl">
-                    <Image src="/fun-facts/stack-3.webp" alt="Web Dev" fill className="object-cover" />
+                    <Image src="/fun-facts/stack-3.png" alt="Web Dev" fill className="object-cover" />
                   </div>
                 </div>
                 <div className="mt-auto">
@@ -256,7 +256,7 @@ export default function FunFacts() {
 
               {/* Card 4: Worldwide (Small) */}
               <div className="reveal-card p-6 md:p-10 bg-[#1A1A1A] text-white rounded-[32px] relative overflow-hidden flex justify-between items-center group min-h-[140px]">
-                <Image src="/fun-facts/world-bg.webp" alt="World Map" fill className="object-cover opacity-30 group-hover:scale-110 transition-transform duration-1000 pointer-events-none" />
+                <Image src="/fun-facts/world-bg.png" alt="World Map" fill className="object-cover opacity-30 group-hover:scale-110 transition-transform duration-1000 pointer-events-none" />
                 <div className="relative z-10 text-[15px] max-w-[140px] leading-tight font-light opacity-80 group-hover:opacity-100 transition-opacity">
                   Worldwide base around the world
                 </div>
