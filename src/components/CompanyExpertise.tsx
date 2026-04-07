@@ -16,35 +16,35 @@ const EXPERTISE_ITEMS = [
     title: "User Interface & Experience Design",
     description: "We create intuitive, engaging digital experiences by putting your users at the center of the design process. From wireframes to high-fidelity prototypes, we ensure every interaction is meaningful.",
     categories: ["UI/UX", "RESEARCH", "PROTOTYPING", "STRATEGY"],
-    image: "/expertise-1.png",
+    image: "/expertise-1.webp",
   },
   {
     id: 2,
     title: "Web Development",
     description: "Building fast, secure, and scalable websites using the latest technologies. We specialize in high-performance frontends and robust backends tailored to your specific business needs.",
     categories: ["NEXT.JS", "REACT", "TYPESCRIPT", "TAILWIND"],
-    image: "/expertise-2.png",
+    image: "/expertise-2.webp",
   },
   {
     id: 3,
     title: "Search Engine Optimization",
     description: "Drive organic traffic and improve your search rankings with our data-driven SEO strategies. We optimize everything from site structure to content to help your brand get discovered.",
     categories: ["TECHNICAL SEO", "KEYWORDS", "ANALYTICS", "CONTENT"],
-    image: "/expertise-1.png",
+    image: "/expertise-1.webp",
   },
   {
     id: 4,
     title: "Digital Marketing",
     description: "Scale your business with targeted digital marketing campaigns. We help you reach the right audience at the right time through social, search, and display channels.",
     categories: ["SOCIAL", "ADS", "GROWTH", "CAMPAIGNS"],
-    image: "/expertise-2.png",
+    image: "/expertise-2.webp",
   },
   {
     id: 5,
     title: "Low-Code Development",
     description: "Accelerate your digital transformation with our low-code expertise. We build robust, custom applications faster without compromising on quality or performance.",
     categories: ["BUBBLE", "WEBFLOW", "FLUTTERFLOW", "AUTOMATION"],
-    image: "/expertise-1.png",
+    image: "/expertise-1.webp",
   },
 ];
 
@@ -264,10 +264,10 @@ export default function CompanyExpertise() {
            <div className="testimonial-marquee animate-marquee-seamless hover:pause">
               <div className="flex gap-x-12 md:gap-x-24 px-6 md:px-12 items-center">
                 {[
-                  { avatar: "/ceo.png", quote: "Best design communicator" },
-                  { avatar: "/ceo.png", quote: "10/10 well recommanded" },
-                  { avatar: "/ceo.png", quote: "Super speedy website designer" },
-                  { avatar: "/ceo.png", quote: "Great in UI/UX" }
+                  { avatar: "/ceo.webp", quote: "Best design communicator" },
+                  { avatar: "/ceo.webp", quote: "10/10 well recommanded" },
+                  { avatar: "/ceo.webp", quote: "Super speedy website designer" },
+                  { avatar: "/ceo.webp", quote: "Great in UI/UX" }
                 ].map((test, i) => (
                   <div key={`${test.quote}-${i}`} className="testimonial-item flex items-center gap-4 group shrink-0">
                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border border-white/10 grayscale group-hover:grayscale-0 transition-all duration-500">
@@ -280,10 +280,10 @@ export default function CompanyExpertise() {
                 ))}
                 {/* Duplicate for seamlessness */}
                 {[
-                  { avatar: "/ceo.png", quote: "Best design communicator" },
-                  { avatar: "/ceo.png", quote: "10/10 well recommanded" },
-                  { avatar: "/ceo.png", quote: "Super speedy website designer" },
-                  { avatar: "/ceo.png", quote: "Great in UI/UX" }
+                  { avatar: "/ceo.webp", quote: "Best design communicator" },
+                  { avatar: "/ceo.webp", quote: "10/10 well recommanded" },
+                  { avatar: "/ceo.webp", quote: "Super speedy website designer" },
+                  { avatar: "/ceo.webp", quote: "Great in UI/UX" }
                 ].map((test, i) => (
                   <div key={`${test.quote}-dup-${i}`} className="testimonial-item flex items-center gap-4 group shrink-0">
                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border border-white/10 grayscale group-hover:grayscale-0 transition-all duration-500">
