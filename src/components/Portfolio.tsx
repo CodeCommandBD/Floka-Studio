@@ -81,7 +81,7 @@ export default function Portfolio() {
           trigger: headingRef.current,
           start: "top 90%",
           end: "top 60%",
-          scrub: 0.5,
+          scrub: 1.2,
         },
         opacity: 0,
         x: 40,
@@ -108,7 +108,7 @@ export default function Portfolio() {
               trigger: ref.current,
               start: "top 90%",
               end: "top 50%", 
-              scrub: true,
+              scrub: 1.2,
             }
           }
         );
@@ -127,8 +127,9 @@ export default function Portfolio() {
       ref={containerRef}
       className="w-full py-24 md:py-32 bg-[#F9F9F9] border-t border-black/5" 
       style={{ fontFamily: 'var(--font-funnel), sans-serif' }}
+      suppressHydrationWarning
     >
-      <div className="max-w-[1280px] mx-auto px-6">
+      <div className="max-w-[1280px] mx-auto px-6" suppressHydrationWarning>
         {/* ── Section Header (Stacked Layout) ── */}
         <div className="flex flex-col mb-16 md:mb-24 pt-8 relative z-0">
           {/* Label Row with Full Width Line */}
@@ -157,10 +158,10 @@ export default function Portfolio() {
         </div>
 
         {/* ── Portfolio Grid (3 Animated Parts with Tiered Z-Index) ── */}
-        <div className="flex flex-col gap-24 md:gap-32 relative">
+        <div className="flex flex-col gap-24 md:gap-32 relative" suppressHydrationWarning>
           {/* Part 1: Row 1 (Half Cards) - Bottom tier */}
-          <div className="relative z-10 bg-[#F9F9F9]">
-            <div ref={row1Ref} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+          <div className="relative z-10 bg-[#F9F9F9]" suppressHydrationWarning>
+            <div ref={row1Ref} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10" suppressHydrationWarning>
               {PORTFOLIO_ITEMS.slice(0, 2).map((item) => (
                 <PortfolioCard key={item.id} item={item} />
               ))}
@@ -240,9 +241,10 @@ function PortfolioCard({ item }: { item: typeof PORTFOLIO_ITEMS[0] }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className="group cursor-none h-full"
+      suppressHydrationWarning
     >
       {/* Image Container */}
-      <div className="relative w-full aspect-4/3 md:aspect-auto md:h-[500px] overflow-hidden rounded-[24px] bg-gray-100">
+      <div className="relative w-full aspect-4/3 md:aspect-auto md:h-[500px] overflow-hidden rounded-[24px] bg-gray-100 optimize-gpu" suppressHydrationWarning>
         {/* Logo Overlay */}
         <div className="absolute top-8 left-8 z-20 flex items-center gap-3">
            <div className="w-6 h-6 relative">
