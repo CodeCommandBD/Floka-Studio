@@ -141,10 +141,11 @@ export default function Approach() {
   return (
     <section
       ref={containerRef}
-      className="w-full pt-24 md:pt-32 pb-10 md:pb-16 px-6"
+      className="w-full pt-24 md:pt-32 pb-10 md:pb-16 px-6 will-change-transform"
       style={{ backgroundColor: "#F9F9F9" }}
+      suppressHydrationWarning
     >
-      <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row gap-16 md:gap-24 items-center justify-between">
+      <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row gap-16 md:gap-24 items-center justify-between" suppressHydrationWarning>
         {/* ── Left Side: Rotating Badge + Subtext ── */}
         <div ref={leftColRef} className="w-full md:w-1/3 flex flex-col gap-6">
           {/* Circular Badge */}
@@ -209,6 +210,7 @@ export default function Approach() {
       <div 
         ref={gridRef}
         className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-16 md:mt-24 pointer-events-auto items-start"
+        suppressHydrationWarning
       >
         {/* Card 1: Experience Stats */}
         <div 
@@ -229,7 +231,7 @@ export default function Approach() {
               <div className="flex -space-x-3">
                 {[1, 2, 3, 4].map((i) => (
                   <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden relative bg-gray-200">
-                    <Image src="/almond-nelsi.png" alt="av" fill className="object-cover object-top" />
+                    <Image src="/profile.webp" alt="user" fill className="object-cover object-top" />
                   </div>
                 ))}
               </div>
