@@ -26,11 +26,11 @@ export default function ContactSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
 
   return (
-    <section ref={containerRef} className="w-full bg-[#0a0a0a] py-40 px-6 relative z-10 overflow-hidden">
+    <section ref={containerRef} className="w-full bg-[#0a0a0a] py-40 px-6 relative z-10 overflow-hidden" suppressHydrationWarning>
       {/* Subtle Grain Overlay */}
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" suppressHydrationWarning></div>
       
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
+      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20 items-center" suppressHydrationWarning>
         
         {/* Left Column - Static Heading */}
         <div className="lg:col-span-5 flex flex-col gap-10">
