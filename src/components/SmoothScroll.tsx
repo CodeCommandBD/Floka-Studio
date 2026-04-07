@@ -2,38 +2,45 @@
 
 import { ReactNode, useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function SmoothScroll({ children }: { children: ReactNode }) {
   useEffect(() => {
-    // ✅ Lenis শুধু desktop (mouse/trackpad) device-এ চলবে
-    // Mobile/tablet-এ native scroll ব্যবহার হবে → কোনো lag নেই
+    // ✅ Lenis only on desktop
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
     if (isTouch) return;
 
+    // Register ScrollTrigger to GSAP
+    gsap.registerPlugin(ScrollTrigger);
+
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 1.4, // Silky glide duration
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1,
+      wheelMultiplier: 1.0,
+      lerp: 0.1, // Added linear interpolation for consistent smoothness
       infinite: false,
     });
 
-    let rafId: number;
+    // Synchronize Lenis with ScrollTrigger
+    // This is the most crucial part for smooth scroll-triggered animations
+    lenis.on("scroll", ScrollTrigger.update);
 
-    function raf(time: number) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
 
-    rafId = requestAnimationFrame(raf);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      gsap.ticker.remove(lenis.raf);
       lenis.destroy();
     };
   }, []);
 
   return <>{children}</>;
 }
+
