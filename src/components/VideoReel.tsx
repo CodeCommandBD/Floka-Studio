@@ -50,7 +50,7 @@ export default function VideoReel() {
           >
             {/* New Video Poster / Thumbnail (without play button) */}
             <Image 
-              src="/video-banner-new.png" 
+              src="/video-banner-new.webp" 
               alt="Video Reel Thumbnail" 
               fill 
               className="object-cover transition-opacity duration-700 opacity-100"
