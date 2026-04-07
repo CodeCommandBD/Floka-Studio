@@ -247,7 +247,7 @@ export default function Approach() {
         >
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[140%] lg:w-[80%] lg:h-[115%] pointer-events-none z-10 origin-bottom transition-transform duration-[800ms] ease-out group-hover:scale-[1.05]">
             <div ref={ceoImageRef} className="w-full h-full relative">
-              <Image src="/ceo.png" alt="Floka CEO" fill className="object-contain object-bottom drop-shadow-2xl" priority />
+              <Image src="/ceo.webp" alt="Floka CEO" fill className="object-contain object-bottom drop-shadow-2xl" priority />
             </div>
           </div>
 
