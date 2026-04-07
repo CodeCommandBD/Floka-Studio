@@ -31,7 +31,7 @@ export default function ParticleLogo() {
 
     // Load SVG 
     const img = new Image();
-    img.src = "/bird-logo.svg";
+    img.src = "/floka-logo.svg";
     img.crossOrigin = "Anonymous";
     imageRef.current = img;
 
@@ -46,13 +46,20 @@ export default function ParticleLogo() {
       canvas.width = container.clientWidth;
       canvas.height = container.clientHeight;
 
-      // Logo scaling logic
-      const imgWidth = Math.min(canvas.width * 0.6, 500); 
+      // RESPONSIVE SCALING & POSITIONING
+      const isSmallScreen = window.innerWidth < 1024;
+      
+      // Scale: 50% width on desktop/large laptop, 80% on small screens
+      const scaleMultiplier = isSmallScreen ? 0.8 : 0.5;
+      const imgWidth = Math.min(canvas.width * scaleMultiplier, 500); 
       const ratio = img.width / img.height;
       const imgHeight = imgWidth / ratio;
       
       const startX = (canvas.width - imgWidth) / 2;
-      const startY = (canvas.height - imgHeight) / 2;
+      
+      // TARGET CENTER: 15% on small screens, 25% on desktop
+      const targetCenterY = isSmallScreen ? canvas.height * 0.15 : canvas.height * 0.25;
+      const startY = targetCenterY - imgHeight / 2;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, startX, startY, imgWidth, imgHeight);
@@ -60,8 +67,8 @@ export default function ParticleLogo() {
       const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // HIGH DENSITY: gap: 1.5, size: 1
-      const gap = 1.8;
+      // REDUCED DENSITY for Performance: gap: 2.8, size: 1
+      const gap = 2.8;
       particles.current = [];
 
       for (let y = 0; y < canvas.height; y += gap) {
@@ -75,7 +82,7 @@ export default function ParticleLogo() {
               y: Math.random() * canvas.height,
               originX: x,
               originY: y,
-              color: "#ffcc00",
+              color: "#FFD700", // Golden premium feel
               size: 1, // High resolution dots
               vx: 0,
               vy: 0,
@@ -85,8 +92,6 @@ export default function ParticleLogo() {
           }
         }
       }
-
-      gsap.ticker.add(render);
     };
 
     const render = () => {
@@ -103,26 +108,35 @@ export default function ParticleLogo() {
         const distSq = dx * dx + dy * dy;
         const dist = Math.sqrt(distSq);
 
-        // INVERSE SQUARE REPULSION (High-end feel)
+        // INVERSE SQUARE REPULSION (Fluid & Stronger)
         if (dist < mRadius) {
             const force = (mRadius - dist) / mRadius;
             const angle = Math.atan2(dy, dx);
-            const scattering = (repulsionPower / distSq) * force;
+            const scattering = (repulsionPower / distSq) * force * 1.5; // Added slight boost
             
             p.vx -= Math.cos(angle) * scattering;
             p.vy -= Math.sin(angle) * scattering;
+            
+            // Dynamic color shift when near mouse
+            if (dist < 50) {
+                p.color = "#FFFACD"; // Brighter LemonChiffon gold when active
+            } else {
+                p.color = "#FFD700";
+            }
+        } else {
+            p.color = "#FFD700";
         }
 
-        // SPRING-LIKE RETURN TO ORIGIN
-        p.vx += (p.originX - p.x) * p.ease;
-        p.vy += (p.originY - p.y) * p.ease;
+        // FLUID MOTION (Adjusted ease and friction)
+        p.vx += (p.originX - p.x) * (p.ease * 1.2); 
+        p.vy += (p.originY - p.y) * (p.ease * 1.2); 
 
-        // RESTLESS MOTION (IDLE JITTER)
-        p.vx += (Math.random() * 0.1 - 0.05);
-        p.vy += (Math.random() * 0.1 - 0.05);
+        // SLIGHT WAVE JITTER
+        p.vx += (Math.random() * 0.15 - 0.075);
+        p.vy += (Math.random() * 0.15 - 0.075);
 
-        p.vx *= p.friction;
-        p.vy *= p.friction;
+        p.vx *= (p.friction - 0.02); // Slightly more snappy
+        p.vy *= (p.friction - 0.02);
 
         p.x += p.vx;
         p.y += p.vy;
@@ -145,6 +159,7 @@ export default function ParticleLogo() {
 
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("resize", handleResize);
+    gsap.ticker.add(render);
 
     return () => {
       gsap.ticker.remove(render);
@@ -154,22 +169,23 @@ export default function ParticleLogo() {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full h-full relative bg-black cursor-none">
-        {/* Glow behind particles */}
+    <div ref={containerRef} className="w-full h-full relative bg-[#020617] overflow-hidden rounded-[inherit]">
+        {/* Mesh Gradient Blobs — Optimized Blur */}
+        <div className="absolute top-1/4 left-1/4 w-[60%] h-[60%] bg-indigo-500/5 blur-[80px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[40%] h-[40%] bg-slate-500/5 blur-[60px] rounded-full hover:bg-slate-500/10 transition-colors duration-1000 pointer-events-none" />
+
+        {/* Dynamic Glow behind particles — Performance Optimized */}
         <div 
-            className="fixed w-48 h-48 bg-yellow-400/10 blur-[80px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2 z-0 transition-opacity duration-300"
+            className="fixed w-[20vw] h-[20vw] bg-yellow-600/5 blur-[80px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2 z-0 transition-opacity duration-300"
             style={{ left: mouse.current.x, top: mouse.current.y }}
         />
         <canvas ref={canvasRef} className="relative z-10 block" />
         
-        {/* Cinematic Text Overlay */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20 text-center mix-blend-difference">
-            <h2 className="text-white/20 text-[clamp(40px,10vw,120px)] font-black uppercase tracking-tighter select-none">
-                Interactive Lab
+        {/* Cinematic Text Overlay (Responsive Position) */}
+        <div className="absolute top-[15%] lg:top-[25%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20 text-center mix-blend-difference">
+            <h2 className="text-white/5 text-[clamp(40px,10vw,120px)] font-black uppercase tracking-tighter select-none leading-[0.9]">
+                FLOKA STUDIO
             </h2>
-            <p className="text-white/40 text-[clamp(8px,1vw,12px)] uppercase tracking-[0.8em] mt-4">
-                Dynamic Particle Interaction — Expt 001
-            </p>
         </div>
     </div>
   );
